@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wisdom_of_the_day/Core/Locales/app_translations.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.home,
       getPages: AppPages.pages,
       translations: AppTranslations(),
-      locale: Get.locale,
+      locale: Get.deviceLocale,
       fallbackLocale: const Locale('en'),
       supportedLocales: const [
         Locale('en'),

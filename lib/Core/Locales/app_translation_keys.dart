@@ -8,4 +8,5 @@ class AppTranslationKeys {
   static const String system = 'system';
   static const String light = 'light';
   static const String dark = 'dark';
+  static const String checkInternet = 'check_internet';
 }

@@ -14,6 +14,8 @@ class AppTranslations extends Translations {
           AppTranslationKeys.system: 'System',
           AppTranslationKeys.light: 'Light',
           AppTranslationKeys.dark: 'Dark',
+          AppTranslationKeys.checkInternet:
+              'Error connecting to the server, Check your internet connection or wait until the server responds',
         },
         'ar': {
           AppTranslationKeys.title: 'حكمة اليوم',
@@ -24,6 +26,8 @@ class AppTranslations extends Translations {
           AppTranslationKeys.system: 'النظام',
           AppTranslationKeys.light: 'ساطع',
           AppTranslationKeys.dark: 'مظلم',
+          AppTranslationKeys.checkInternet:
+              'خطأ في الإتصال بالخادم, تحقق من اتصالك بالإنترنت أو انتظر حتى يستجيب الخادم',
         },
       };
 }

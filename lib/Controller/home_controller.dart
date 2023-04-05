@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wisdom_of_the_day/Core/Locales/app_translation_keys.dart';
 import 'package:wisdom_of_the_day/Core/Themes/app_themes.dart';
 import 'package:wisdom_of_the_day/Model/Models/wisdom_model.dart';
 import 'package:wisdom_of_the_day/Model/Repositories/wisdom_repository.dart';
@@ -38,7 +41,9 @@ class HomeController extends GetxController {
       _wisdom = WisdomCache.getWisdom();
       if (_wisdom == null) {
         _hasError = true;
-        _error = e.toString().replaceRange(0, 11, '');
+        _error = e is SocketException
+            ? AppTranslationKeys.checkInternet.tr
+            : e.toString().replaceRange(0, 11, '');
       }
     }
     _isLoading = false;
@@ -59,7 +64,7 @@ class HomeController extends GetxController {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: const Text('Account'),
+              title: Text(AppTranslationKeys.account.tr),
               leading: const Icon(Icons.person_outline),
               onTap: () {},
             ),
@@ -67,7 +72,7 @@ class HomeController extends GetxController {
               thickness: 1,
             ),
             ListTile(
-              title: const Text('Theme'),
+              title: Text(AppTranslationKeys.themes.tr),
               leading: const Icon(Icons.dark_mode_outlined),
               onTap: _showThemes,
             ),
@@ -75,15 +80,15 @@ class HomeController extends GetxController {
               thickness: 1,
             ),
             ListTile(
-              title: const Text('Language'),
+              title: Text(AppTranslationKeys.languages.tr),
               leading: const Icon(Icons.translate_outlined),
-              onTap: () {},
+              onTap: _showLocales,
             ),
             const Divider(
               thickness: 1,
             ),
             ListTile(
-              title: const Text('Log out'),
+              title: Text(AppTranslationKeys.logout.tr),
               textColor: Colors.red,
               iconColor: Colors.red,
               leading: const Icon(Icons.logout_outlined),
@@ -91,6 +96,36 @@ class HomeController extends GetxController {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showLocales() {
+    Get.back();
+    final List<String> items = [
+      AppTranslationKeys.system,
+      'English',
+      'العربية'
+    ];
+    Get.bottomSheet(
+      StatefulBuilder(
+        builder: (context, setState) {
+          return Card(
+            clipBehavior: Clip.antiAlias,
+            child: ReorderableList(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  key: ValueKey(index),
+                  title: Text(items[index]),
+                );
+              },
+              onReorder: (oldIndex, newIndex) {
+                setState(() {});
+              },
+            ),
+          );
+        },
       ),
     );
   }
